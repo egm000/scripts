@@ -21,7 +21,7 @@ WIN_BACKUP_SUBFOLDER="timeshift_backup"
 find_windows_mount() {
     echo "🔍 Searching for mounted Windows NTFS partition..."
     # Try to detect a mounted NTFS partition under /media/$USER/
-    WIN_MOUNT=$(find /media/"$USER" -maxdepth 2 -type d -iname "Windows*" -print -quit 2>/dev/null)
+    WIN_MOUNT=$(find /media/"${SUDO_USER: -$USER}" -maxdepth 2 -type d -iname "Windows*" -print -quit 2>/dev/null)
 
     if [[ -z "$WIN_MOUNT" ]]; then
         echo "⚠️  No Windows partition found under /media/$USER/"
